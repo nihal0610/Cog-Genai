@@ -1,0 +1,6 @@
+pandas
+streamlit
+openai
+langchain[all]
+python-dotenv
+datetime
