@@ -4,3 +4,4 @@ openai
 langchain[all]
 python-dotenv
 datetime
+langchain-expermental
