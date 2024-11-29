@@ -7,7 +7,7 @@ from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe
 from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv
 from datetime import datetime
-st.title("Cognizant Excel file chatbot")
+st.title("Excel file chatbot")
  
 api_key=st.text_input("Please paste your open AI key here")
 button0=st.button("Click to submit key")
