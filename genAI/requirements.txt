@@ -6,3 +6,4 @@ python-dotenv
 datetime
 langchain-experimental
 openpyxl
+tabulate
