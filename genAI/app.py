@@ -11,10 +11,8 @@ from langchain_community.chat_models import ChatOpenAI
 st.title("Excel file chatbot")
  
 api_key=st.text_input("Please paste your open AI key here")
-button0=st.button("Click to submit key")
- 
-if button0 is True:
-    llm = ChatOpenAI(
+
+llm = ChatOpenAI(
             openai_api_key =api_key,
             temperature = 0,
             max_tokens = 4000,
