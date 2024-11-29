@@ -10,17 +10,17 @@ from datetime import datetime
 from langchain_community.chat_models import ChatOpenAI
 st.title("Excel file chatbot")
  
-api_key=st.text_input("Please paste your open AI key here")
+# api_key=st.text_input("Please paste your open AI key here")
 
-llm = ChatOpenAI(
-            openai_api_key =api_key,
-            temperature = 0,
-            max_tokens = 4000,
-            model_name= "gpt-3.5-turbo-16k"
-        )
+# llm = ChatOpenAI(
+#             openai_api_key =api_key,
+#             temperature = 0,
+#             max_tokens = 4000,
+#             model_name= "gpt-3.5-turbo-16k"
+#         )
  
-st.markdown("Please upload your excel file (the file should have extension .xlsx).")
-file = st.file_uploader("select your file",type=["xlsx"])
+# st.markdown("Please upload your excel file (the file should have extension .xlsx).")
+# file = st.file_uploader("select your file",type=["xlsx"])
  
 # if file is not None:
 #     df=pd.read_excel(file)
