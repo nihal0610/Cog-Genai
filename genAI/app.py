@@ -16,7 +16,7 @@ llm = ChatOpenAI(
             openai_api_key =api_key,
             temperature = 0,
             max_tokens = 4000,
-            model_name= "gpt-3.5-turbo-16k"
+            model_name= "gpt-4o"
         )
  
 st.markdown("Please upload your excel file (the file should have extension .xlsx).")
