@@ -15,7 +15,7 @@ api_key=st.text_input("Please paste your open AI key here")
 llm = ChatOpenAI(
             openai_api_key =api_key,
             temperature = 0,
-            max_tokens = 16000,
+            max_tokens = 100,
             model_name= "gpt-4o"
         )
  
