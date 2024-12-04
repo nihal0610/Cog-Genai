@@ -23,7 +23,7 @@ if api_key:
             st.markdown("Please upload your excel file (the file should have extension .xlsx).")
             file = st.file_uploader("select your file",type=["xlsx"])
              
-            if file:
+            if file is not None:
                 df=pd.read_excel(file)
                 df['ProjectEnddate2'] = pd.to_datetime(df['ProjectEnddate'])
                 df['Days_Remaining'] = (df['ProjectEnddate2'] - datetime.now()).dt.days
