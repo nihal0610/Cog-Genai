@@ -73,7 +73,7 @@ from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv
 from datetime import datetime
 api_key=st.text_input("Please paste your open AI key here")
-if button0 is True:
+if api_key:
     llm = ChatOpenAI(
             openai_api_key =api_key,
             temperature = 0,
