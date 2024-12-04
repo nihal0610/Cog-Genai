@@ -102,7 +102,7 @@ if api_key:
             d=st.selectbox('PLease select either u want the results to be equal,greater or less than the amount of days u specify',('Equal to','Greater than','Less than')),
             st.write(f"Your Query will be Sending mails to all manger under project type {a} who has {d} {c} days {e} from {b}. If u wish to continue please press on submit.")
             button = st.button("Submit")
-        input1=f"Give me IDs of all managers in a python list with each item should be iterable, whose Days {e} from {b} is {d} {c} and project type is {a}"
+        input1=f"Give me IDs of managers, Project name in a python list with each item should be iterable, whose Days {e} from {b} is {d} {c} and project type is {a}"
         if button is True:  
             agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60)
             result=agent.invoke(input1)
