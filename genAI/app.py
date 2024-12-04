@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from langchain_community.chat_models import ChatOpenAI
 st.title("Excel file chatbot")
- 
+api_key = None 
 api_key=st.text_input("Please paste your open AI key here")
 
 llm = ChatOpenAI(
