@@ -106,12 +106,6 @@ if api_key:
         if button is True:  
             agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60)
             result=agent.invoke(input1)
-            result = result["output"].rstrip(']').lstrip('[')
-            result= result.split(",")
-       
-            for i in range(0,len(result)):
-                result[i] = result[i].lstrip(' ')+'@cognizant.com'
-        # st.write()
             st.write(result)
         #st.write("The emails are ready . Do you want to send?")
         if button2 is True:
