@@ -44,8 +44,8 @@ if api_key:
                  agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60, handle_parsing_errors=True)
                  result=agent.invoke(input1)  
                  st.write(result)
-                checkbox = st.checkbox("Click on the chekbox if you want to input your question")
-                if checkbox is True:
+               checkbox = st.checkbox("Click on the chekbox if you want to input your question")
+               if checkbox is True:
                      user_question=st.text_input("If you have other questions related to the file please enter here..")
                      button2=st.button("Submit Question")
                      if button2 is True:
