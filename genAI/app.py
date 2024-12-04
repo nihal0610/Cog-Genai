@@ -112,5 +112,5 @@ if api_key:
             agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60)
             result=agent.invoke(user_question)
             st.write(result)
-            st.write(type(result))
+            st.write(type(result["output"]))
  
