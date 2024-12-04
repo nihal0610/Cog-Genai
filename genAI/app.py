@@ -23,7 +23,7 @@ if api_key:
             st.markdown("Please upload your excel file (the file should have extension .xlsx).")
             file = st.file_uploader("select your file",type=["xlsx"])
              
-            if file is not None:
+            if file:
                 df=pd.read_excel(file)
                 df['ProjectEnddate2'] = pd.to_datetime(df['ProjectEnddate'])
                 df['Days_Remaining'] = (df['ProjectEnddate2'] - datetime.now()).dt.days
@@ -40,15 +40,9 @@ if api_key:
                     st.write(f"Your Query will be providing you with project name, manager name, project type {a} who has {d} {c} days {e} from {b}. If u wish to continue please press on submit.")
                     button = st.button("Submit")
                     input1=f"Give me Project name, Project ID, Manager name, and manager ID whose Days {e} from {b} is {d} {c} and project type is {a}"
-                    if button is True:  
-                        agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60, handle_parsing_errors=True)
-                        result=agent.invoke(input1)
-                    # result = result["output"].rstrip(']').lstrip('[')
-                    # result= result.split(",")
-                   
-                    # for i in range(0,len(result)):
-                    #     result[i] = result[i].lstrip(' ')+'@cognizant.com'
-                    # st.write()
+            if button is True:  
+                 agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60, handle_parsing_errors=True)
+                 result=agent.invoke(input1)  
                  st.write(result)
                 checkbox = st.checkbox("Click on the chekbox if you want to input your question")
                 if checkbox is True:
@@ -58,4 +52,10 @@ if api_key:
                          agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60,handle_parsing_errors=True)
                          result=agent.invoke(user_question)
                          st.write(result)
+# result = result["output"].rstrip(']').lstrip('[')
+# result= result.split(",")
+                   
+# for i in range(0,len(result)):
+#     result[i] = result[i].lstrip(' ')+'@cognizant.com'
+# st.write()
              
