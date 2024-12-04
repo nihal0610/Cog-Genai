@@ -41,7 +41,7 @@ if api_key:
                     button = st.button("Submit")
                 input1=f"Give me Project name, Project ID, Manager name, and manager ID whose Days {e} from {b} is {d} {c} and project type is {a}"
                 if button is True:  
-                    agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60)
+                    agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60, handle_parsing_errors=True)
                     result=agent.invoke(input1)
                     # result = result["output"].rstrip(']').lstrip('[')
                     # result= result.split(",")
@@ -57,7 +57,7 @@ if api_key:
                     
             
                      if button2 is True:
-                         agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60)
+                         agent=create_pandas_dataframe_agent(llm,df,verbose=False,allow_dangerous_code=True,max_iterations=60,handle_parsing_errors=True)
                          result=agent.invoke(user_question)
                          st.write(result)
              
