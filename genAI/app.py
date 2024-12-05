@@ -61,7 +61,7 @@ if uploaded_file is not None and openai_api_key:
              # Filter DataFrame            
              filtered_df = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
              st.write(filtered_df)
-             filtered_df = pd.DataFrame()
+             filtered_df = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"])
              value= []
              st.write("Data reinitialized:", filtered_df, value)
              # Save to Excel
