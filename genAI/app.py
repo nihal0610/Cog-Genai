@@ -19,14 +19,15 @@ uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx", "csv"])
 prompt = st.text_area("Enter your prompt")
 
 if st.button("Submit"):
-     with st.sidebar:
-            st.title("Please select in the drop down if u want to send project specific emails")
-            a=st.selectbox('Please select one project type',('MGMNT','EXTN','SALES','PDP','INFRA','TCE','CRPIT','DMGMT','INVMT','CORP','RCMNT','BENCH','EXANT','MKTAL','OPS','CAPEX','UAMCP','ELT','GGMS','PRDCG')),
-            b=st.selectbox('Please select from which Project date u want to calculate days',('Project start date','Project end date')),
-            c=st.text_input("Please enter the days")
-            e=st.selectbox('PLease select the days passed from the date or remaining to the date',('Passed','Remaining')),
-            d=st.selectbox('PLease select either u want the results to be equal,greater or less than the amount of days u specify',('Equal to','Greater than','Less than')),
-            st.write(f"Your Query will be Sending mails to all manger under project type {a} who has {d} {c} days {e} from {b}. If u wish to continue please press on submit.")
+     
+    with st.sidebar:
+           st.title("Please select in the drop down if u want to send project specific emails")
+           a=st.selectbox('Please select one project type',('MGMNT','EXTN','SALES','PDP','INFRA','TCE','CRPIT','DMGMT','INVMT','CORP','RCMNT','BENCH','EXANT','MKTAL','OPS','CAPEX','UAMCP','ELT','GGMS','PRDCG')),
+           b=st.selectbox('Please select from which Project date u want to calculate days',('Project start date','Project end date')),
+           c=st.text_input("Please enter the days")
+           e=st.selectbox('PLease select the days passed from the date or remaining to the date',('Passed','Remaining')),
+           d=st.selectbox('PLease select either u want the results to be equal,greater or less than the amount of days u specify',('Equal to','Greater than','Less than')),
+           st.write(f"Your Query will be Sending mails to all manger under project type {a} who has {d} {c} days {e} from {b}. If u wish to continue please press on submit.")
             
     if not openai_api_key:
         st.error("Please enter your OpenAI API key.")
