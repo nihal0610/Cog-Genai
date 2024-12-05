@@ -32,19 +32,32 @@ if st.button("Submit"):
         else:
             ddf = pd.read_excel(uploaded_file)
 
-        # Process date columns
-        ddf['ProjectEnddate2'] = pd.to_datetime(ddf['ProjectEnddate'])
-        ddf['Days_Remaining'] = (ddf['ProjectEnddate2'] - datetime.now()).dt.days
-        ddf['ProjectStartdate1'] = pd.to_datetime(ddf['ProjectStartdate'])
-        ddf['Days_passed'] = (datetime.now() - ddf['ProjectStartdate1']).dt.days
-
-        # Initialize the language model
+         # Initialize the language model
         llm = ChatOpenAI(
             openai_api_key=openai_api_key,
             temperature=0,
             max_tokens=4000,
             model_name="gpt-3.5-turbo-16k"
         )
+
+        
+        # Process date columns
+        ddf['ProjectEnddate2'] = pd.to_datetime(ddf['ProjectEnddate'])
+        ddf['Days_Remaining'] = (ddf['ProjectEnddate2'] - datetime.now()).dt.days
+        ddf['ProjectStartdate1'] = pd.to_datetime(ddf['ProjectStartdate'])
+        ddf['Days_passed'] = (datetime.now() - ddf['ProjectStartdate1']).dt.days
+
+        with st.sidebar:
+            st.title("Please select in the drop down if u want to send project specific emails")
+            a=st.selectbox('Please select one project type',('MGMNT','EXTN','SALES','PDP','INFRA','TCE','CRPIT','DMGMT','INVMT','CORP','RCMNT','BENCH','EXANT','MKTAL','OPS','CAPEX','UAMCP','ELT','GGMS','PRDCG')),
+            b=st.selectbox('Please select from which Project date u want to calculate days',('Project start date','Project end date')),
+            c=st.text_input("Please enter the days")
+            e=st.selectbox('PLease select the days passed from the date or remaining to the date',('Passed','Remaining')),
+            d=st.selectbox('PLease select either u want the results to be equal,greater or less than the amount of days u specify',('Equal to','Greater than','Less than')),
+            st.write(f"Your Query will be Sending mails to all manger under project type {a} who has {d} {c} days {e} from {b}. If u wish to continue please press on submit.")
+            
+      
+       
 
         # Create the agent
         agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=100)
