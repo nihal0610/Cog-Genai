@@ -57,7 +57,7 @@ if uploaded_file is not None and openai_api_key:
                   value[i]=int(value[i])
              st.write(value[0:5])
                
-             Display the result
+             #Display the result
              st.write("Result:", value)
              # Filter DataFrame            
              df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
