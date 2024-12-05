@@ -56,7 +56,7 @@ if uploaded_file:
              agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=100)
           
              # Get the result
-             result1 = agent.invoke(prompt)
+             result1 = agent.invoke(input)
              value = result1['output']
           
              if isinstance(value, str):
