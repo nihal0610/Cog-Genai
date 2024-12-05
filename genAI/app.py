@@ -26,7 +26,7 @@ if openai_api_key:
      else:
          ddf = pd.read_excel(uploaded_file)
 
-if ddf:
+if uploaded_file:
         with st.sidebar:
            st.title("Please select in the drop down if u want to send project specific emails")
            a=st.selectbox('Please select one project type',('MGMNT','EXTN','SALES','PDP','INFRA','TCE','CRPIT','DMGMT','INVMT','CORP','RCMNT','BENCH','EXANT','MKTAL','OPS','CAPEX','UAMCP','ELT','GGMS','PRDCG')),
