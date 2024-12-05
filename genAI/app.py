@@ -54,12 +54,13 @@ if uploaded_file is not None and openai_api_key:
              st.write(value[0:5])
              for i in range(0, len(value)):
                   value[i] =value[i].strip(" ")
+                  value[i]=int(value[i])
              st.write(value[0:5])
                
-             # Display the result
-             # st.write("Result:", value)
-             # # Filter DataFrame            
-             # df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
-             # st.write(df2)
-             # df2 = pd.DataFrame()
-             # st.write(df2)
+             Display the result
+             st.write("Result:", value)
+             # Filter DataFrame            
+             df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
+             st.write(df2)
+             df2 = pd.DataFrame()
+             st.write(df2)
