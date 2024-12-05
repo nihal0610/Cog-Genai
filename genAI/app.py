@@ -42,12 +42,6 @@ if uploaded_file is not None and openai_api_key:
            input = f"Give me IDs of all managers in a list format, whose days_{d} from {b} is {e} {c} and project type is {a}"
            st.write(f"Your Query will be getting results of whose project type is {a} and days_{d} from {b} is {e} {c} days . If u wish to continue please press on submit.")
            button = st.button("Submit")
-
-        # Initialize session state 
-        if 'filtered_df' not in st.session_state: 
-             st.session_state['filtered_df2'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
-        if 'value' not in st.session_state: 
-             st.session_state['value'] = []
              
         if button:
              # Create the agent
@@ -55,31 +49,15 @@ if uploaded_file is not None and openai_api_key:
           
              # Get the result
              result1 = agent.invoke(input)
-             value = result1['output']
-          
-             if isinstance(value, str):
-                 value = value.strip('[]').split(', ')
-                 value = [v.strip("'") for v in value]
-                 value = [int(v) for v in value]
-          
+             value = result1['output']   
+             value = value.strip('[]').split(', ')
+             value = [v.strip("'") for v in value]
+             value = [int(v) for v in value]
+     
              # Display the result
              st.write("Result:", value)
-             
+             button1 = st.button("download")
+         if button1:
              # Filter DataFrame            
-             st.session_state['filtered_df2'] = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
-             st.write(st.session_state['filtered_df2'])
-             st.session_state['filtered_df2'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
-             st.session_state['value'] = []
-             st.write("Data reinitialized:", st.session_state['filtered_df2'], st.session_state['value'])
-             # Save to Excel
-             # filtered_df.to_excel('output.xlsx', index=False)
-             # st.success("Filtered data saved to output.xlsx")
-          
-          
-          
-     
-          
-             # # Input for prompt
-             # prompt = st.text_area("Enter your prompt")    
-              
-            
+             df2 = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
+             st.write(df2)
