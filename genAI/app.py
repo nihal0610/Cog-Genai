@@ -22,7 +22,7 @@ if uploaded_file is not None and openai_api_key:
         llm = ChatOpenAI(
             openai_api_key=openai_api_key,
             temperature=0,
-            max_tokens=4000,
+            max_completion_tokens=4000,
             #model_name="gpt-3.5-turbo-16k"
             model_name="o1-mini"
         )
