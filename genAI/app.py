@@ -50,18 +50,9 @@ if uploaded_file is not None and openai_api_key:
              # Get the result
              result1 = agent.invoke(input)
              value = result1['output']  
-             st.write(type(value))
-             st.write(value)
-             if isinstance(value, str):
-                  value = value.strip('[]').split(', ')
-                  st.write(type(value))
-                  st.write(value)
-                  value = [v.strip("'") for v in value]
-                  st.write(type(value))
-                  st.write(value)
-                  value = [int(v) for v in value]
-                  st.write(type(value))
-                  st.write(value)
+             value = value.strip('[]').split(', ')
+             for i in range(0, len(value):
+                  value[i] = int(value[i].strip("'")) 
              # Display the result
              st.write("Result:", value)
              # Filter DataFrame            
