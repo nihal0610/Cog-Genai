@@ -57,7 +57,7 @@ if uploaded_file is not None and openai_api_key:
              # Display the result
              st.write("Result:", value)
              button1 = st.button("download")
-         if button1:
+        if button1:
              # Filter DataFrame            
              df2 = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
              st.write(df2)
