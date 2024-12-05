@@ -57,12 +57,11 @@ if uploaded_file is not None and openai_api_key:
           
              # Display the result
              st.write("Result:", value)
-          
+             
              # Filter DataFrame
-             filtered_df = pd.DataFrame()
-             filtered_df = filtered_df.drop(filtered_df.index, inplace=True)
              filtered_df = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
              st.write(filtered_df)
+             filtered_df = filtered_df.drop(filtered_df.index, inplace=True)
              
              # Save to Excel
              # filtered_df.to_excel('output.xlsx', index=False)
