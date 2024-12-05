@@ -13,20 +13,17 @@ st.title("Manager Project Analysis")
 openai_api_key = st.text_input("Enter your OpenAI API key", type="password")
 if not openai_api_key:
      st.error("Please enter your OpenAI API key.")
-     
-if openai_api_key:
-     
-     # File uploader for Excel file
-     uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx", "csv"])
-   
-     # Read the uploaded file
-     if uploaded_file.name.endswith('.csv'):
-         ddf = pd.read_csv(uploaded_file)
-          
-     else:
-         ddf = pd.read_excel(uploaded_file)
+# File uploader for Excel file
+uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx", "csv"])
 
-if uploaded_file:
+# Read the uploaded file
+if uploaded_file.name.endswith('.csv'):
+    ddf = pd.read_csv(uploaded_file)
+     
+else:
+    ddf = pd.read_excel(uploaded_file)
+
+if uploaded_file and openai_api_key:
         # Initialize the language model
         llm = ChatOpenAI(
             openai_api_key=openai_api_key,
