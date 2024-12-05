@@ -42,6 +42,13 @@ if uploaded_file is not None and openai_api_key:
            input = f"Give me IDs of all managers in a list format, whose days_{d} from {b} is {e} {c} and project type is {a}"
            st.write(f"Your Query will be getting results of whose project type is {a} and days_{d} from {b} is {e} {c} days . If u wish to continue please press on submit.")
            button = st.button("Submit")
+
+        # Initialize session state 
+        if 'filtered_df' not in st.session_state: 
+             st.session_state['filtered_df'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
+        if 'value' not in st.session_state: 
+             st.session_state['value'] = []
+             
         if button:
              # Create the agent
              agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, max_iterations=100,handle_parsing_errors=True)
@@ -59,11 +66,11 @@ if uploaded_file is not None and openai_api_key:
              st.write("Result:", value)
              
              # Filter DataFrame            
-             filtered_df = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
-             st.write(filtered_df)
-             filtered_df = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"])
-             value= []
-             st.write("Data reinitialized:", filtered_df, value)
+             st.session_state['filtered_df'] = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
+             st.write(st.session_state['filtered_df'])
+             st.session_state['filtered_df'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
+             st.session_state['value'] = []
+
              # Save to Excel
              # filtered_df.to_excel('output.xlsx', index=False)
              # st.success("Filtered data saved to output.xlsx")
