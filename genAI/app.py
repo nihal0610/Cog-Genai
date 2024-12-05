@@ -27,17 +27,6 @@ if openai_api_key:
          ddf = pd.read_excel(uploaded_file)
 
 if uploaded_file:
-        with st.sidebar:
-           st.title("Please select in the drop down if u want to send project specific emails")
-           a=st.selectbox('Please select one project type',('MGMNT','EXTN','SALES','PDP','INFRA','TCE','CRPIT','DMGMT','INVMT','CORP','RCMNT','BENCH','EXANT','MKTAL','OPS','CAPEX','UAMCP','ELT','GGMS','PRDCG')),
-           b=st.selectbox('Please select from which Project date u want to calculate days',('Project start date','Project end date')),
-           c=st.text_input("Please enter the days")
-           e=st.selectbox('PLease select the days passed from the date or remaining to the date',('Passed','Remaining')),
-           d=st.selectbox('PLease select either u want the results to be equal,greater or less than the amount of days u specify',('Equal to','Greater than','Less than')),
-           st.write(f"Your Query will be Sending mails to all manger under project type {a} who has {d} {c} days {e} from {b}. If u wish to continue please press on submit.")
-        # Input for prompt
-        prompt = st.text_area("Enter your prompt")  
-     
         # Initialize the language model
         llm = ChatOpenAI(
             openai_api_key=openai_api_key,
@@ -45,39 +34,52 @@ if uploaded_file:
             max_tokens=4000,
             model_name="gpt-3.5-turbo-16k"
         )
-     
-        
+         
         # Process date columns
         ddf['ProjectEnddate2'] = pd.to_datetime(ddf['ProjectEnddate'])
         ddf['Days_Remaining'] = (ddf['ProjectEnddate2'] - datetime.now()).dt.days
         ddf['ProjectStartdate1'] = pd.to_datetime(ddf['ProjectStartdate'])
         ddf['Days_passed'] = (datetime.now() - ddf['ProjectStartdate1']).dt.days
      
-       
-       
+        with st.sidebar:
+           st.title("Please select in the drop down if u want to send project specific emails")
+           a=st.selectbox('Please select one project type',('MGMNT','EXTN','SALES','PDP','INFRA','TCE','CRPIT','DMGMT','INVMT','CORP','RCMNT','BENCH','EXANT','MKTAL','OPS','CAPEX','UAMCP','ELT','GGMS','PRDCG')),
+           b=st.selectbox('Please select from which Project date u want to calculate days',('Project start date','Project end date')),
+           c=st.text_input("Please enter the days")
+           d=st.selectbox('PLease select the days passed from the date or remaining to the date',('Passed','Remaining')),
+           e=st.selectbox('PLease select either u want the results to be equal,greater or less than the amount of days u specify',('Equal to','Greater than','Less than')),
+           input = f"Give me IDs of all managers in a list format, whose days_{d} from {b} is {e} {c} and project type is {a}"
+           st.write(f"Your Query will be getting results of whose project type is {a} and days_{d} from {b} is {e} {c} days . If u wish to continue please press on submit.")
+           button = st.button("Submit")
+        if button:
+             # Create the agent
+             agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=100)
+          
+             # Get the result
+             result1 = agent.invoke(prompt)
+             value = result1['output']
+          
+             if isinstance(value, str):
+                 value = value.strip('[]').split(', ')
+                 value = [v.strip("'") for v in value]
+                 value = [int(v) for v in value]
+          
+             # Display the result
+             st.write("Result:", value)
+          
+             # Filter DataFrame
+             filtered_df = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
+             st.write(filtered_df)
+          
+             # Save to Excel
+             # filtered_df.to_excel('output.xlsx', index=False)
+             # st.success("Filtered data saved to output.xlsx")
+          
+          
+          
      
-        # Create the agent
-        agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=100)
-     
-        # Get the result
-        result1 = agent.invoke(prompt)
-        value = result1['output']
-     
-        if isinstance(value, str):
-            value = value.strip('[]').split(', ')
-            value = [v.strip("'") for v in value]
-            #value = [int(v) for v in value]
-     
-        # Display the result
-        st.write("Result:", value)
-     
-        # Filter DataFrame
-        filtered_df = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
-        st.write(filtered_df)
-     
-        # Save to Excel
-        filtered_df.to_excel('outputttt.xlsx', index=False)
-        st.success("Filtered data saved to outputttt.xlsx")
-     
-     
-     
+          
+             # # Input for prompt
+             # prompt = st.text_area("Enter your prompt")    
+              
+            
