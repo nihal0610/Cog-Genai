@@ -39,7 +39,7 @@ if uploaded_file is not None and openai_api_key:
            c=st.text_input("Please enter the days")
            d=st.selectbox('PLease select the days passed from the date or remaining to the date',('Passed','Remaining')),
            e=st.selectbox('PLease select either u want the results to be equal,greater or less than the amount of days u specify',('Equal to','Greater than','Less than')),
-           input = f"Give me IDs of all managers in a list format, whose days_{d} from {b} is {e} {c} and project type is {a}"
+           input = f"Give me Project IDs in a list format, whose days_{d} from {b} is {e} {c} and project type is {a}"
            st.write(f"Your Query will be getting results of whose project type is {a} and days_{d} from {b} is {e} {c} days . If u wish to continue please press on submit.")
            button = st.button("Submit")
              
@@ -57,7 +57,7 @@ if uploaded_file is not None and openai_api_key:
              # Display the result
              st.write("Result:", value)
              # Filter DataFrame            
-             df2 = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
+             df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
              st.write(df2)
              df2 = pd.DataFrame()
              st.write(df2)
