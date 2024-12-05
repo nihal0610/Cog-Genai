@@ -60,7 +60,7 @@ if uploaded_file is not None and openai_api_key:
              
              # Filter DataFrame            
              filtered_df = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
-             st.write(filtered_df)
+             st.write(type(filtered_df))
              st.write(filtered_df)
              
              # Save to Excel
