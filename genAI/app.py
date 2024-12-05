@@ -45,7 +45,7 @@ if uploaded_file is not None and openai_api_key:
 
         # Initialize session state 
         if 'filtered_df' not in st.session_state: 
-             st.session_state['filtered_df'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
+             st.session_state['filtered_df2'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
         if 'value' not in st.session_state: 
              st.session_state['value'] = []
              
@@ -66,11 +66,11 @@ if uploaded_file is not None and openai_api_key:
              st.write("Result:", value)
              
              # Filter DataFrame            
-             st.session_state['filtered_df'] = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
-             st.write(st.session_state['filtered_df'])
-             st.session_state['filtered_df'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
+             st.session_state['filtered_df2'] = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
+             st.write(st.session_state['filtered_df2'])
+             st.session_state['filtered_df2'] = pd.DataFrame(columns=["Manager ID", "Project Name", "Project Id"]) 
              st.session_state['value'] = []
-             st.write("Data reinitialized:", st.session_state['filtered_df'], st.session_state['value'])
+             st.write("Data reinitialized:", st.session_state['filtered_df2'], st.session_state['value'])
              # Save to Excel
              # filtered_df.to_excel('output.xlsx', index=False)
              # st.success("Filtered data saved to output.xlsx")
