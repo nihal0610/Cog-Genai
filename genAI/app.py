@@ -44,7 +44,7 @@ if uploaded_file is not None and openai_api_key:
            button = st.button("Submit")
         if button:
              # Create the agent
-             agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=100)
+             agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, max_iterations=100,handle_parsing_errors=True)
           
              # Get the result
              result1 = agent.invoke(input)
