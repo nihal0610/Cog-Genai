@@ -16,9 +16,8 @@ if not openai_api_key:
 # File uploader for Excel file
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 
-ddf = pd.read_excel(uploaded_file)
-
 if uploaded_file is not None and openai_api_key:
+        ddf = pd.read_excel(uploaded_file)
         # Initialize the language model
         llm = ChatOpenAI(
             openai_api_key=openai_api_key,
