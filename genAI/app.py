@@ -56,6 +56,7 @@ if st.button("Submit"):
         if isinstance(value, str):
             value = value.strip('[]').split(', ')
             value = [v.strip("'") for v in value]
+            value = [int(v) for v in value]
 
         # Display the result
         st.write("Result:", value)
