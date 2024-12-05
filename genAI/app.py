@@ -51,7 +51,7 @@ if uploaded_file is not None and openai_api_key:
              result1 = agent.invoke(input)
              value = result1['output']  
              value = value.strip('[]').split(',')
-             st.write(value[0])
+             st.write(value[0:5])
              # for i in range(0, len(value)):
              #      value[i] = int(value[i].strip("'")) 
              # Display the result
