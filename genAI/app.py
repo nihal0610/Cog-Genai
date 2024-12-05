@@ -63,7 +63,7 @@ if uploaded_file is not None and openai_api_key:
              st.write(filtered_df)
              filtered_df = pd.DataFrame()
              value= []
-             
+             st.write("Data reinitialized:", filtered_df, value)
              # Save to Excel
              # filtered_df.to_excel('output.xlsx', index=False)
              # st.success("Filtered data saved to output.xlsx")
