@@ -60,7 +60,7 @@ if uploaded_file is not None and openai_api_key:
           
              # Filter DataFrame
              filtered_df = pd.DataFrame()
-             filtered_df = filtered_df.drop(index = 0, inplace=True)
+             filtered_df = filtered_df.drop(filtered_df.index, inplace=True)
              filtered_df = ddf[ddf["Manager ID"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
              st.write(filtered_df)
              
