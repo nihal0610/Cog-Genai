@@ -52,15 +52,16 @@ if uploaded_file is not None and openai_api_key:
              value = result1['output']  
              st.write(type(value))
              st.write(value)
-             value = value.strip('[]').split(', ')
-             st.write(type(value))
-             st.write(value)
-             value = [v.strip("'") for v in value]
-             st.write(type(value))
-             st.write(value)
-             value = [int(v) for v in value]
-             st.write(type(value))
-             st.write(value)
+             if isinstance(value, str):
+                  value = value.strip('[]').split(', ')
+                  st.write(type(value))
+                  st.write(value)
+                  value = [v.strip("'") for v in value]
+                  st.write(type(value))
+                  st.write(value)
+                  value = [int(v) for v in value]
+                  st.write(type(value))
+                  st.write(value)
              # Display the result
              st.write("Result:", value)
              # Filter DataFrame            
