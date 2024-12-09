@@ -90,7 +90,7 @@ if uploaded_file is not None and openai_api_key:
              #Display the result
              st.write("Result:", result1)
              # Filter DataFrame            
-             df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
+             df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id", "Associate Name"]]
              st.write(df2)
              df2 = pd.DataFrame()
              st.write(df2)
