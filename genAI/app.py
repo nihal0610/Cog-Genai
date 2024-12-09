@@ -57,8 +57,8 @@ if uploaded_file is not None and openai_api_key:
              for i in range(num_parts):
                    start_index = i * entries_per_part
                    # Ensure the last part includes any remaining entries
-                   end_index = start_index + entries_per_part if i < num_parts - 1 else len(df)
-                   dfs.append(df.iloc[start_index:end_index])
+                   end_index = start_index + entries_per_part if i < num_parts - 1 else len(ddf)
+                   dfs.append(ddf.iloc[start_index:end_index])
 
           # Function to create the agent and invoke it on a DataFrame part
              def invoke_agent_on_part(part, input_query):
