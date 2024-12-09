@@ -45,7 +45,7 @@ if uploaded_file is not None and openai_api_key:
            button = st.button("Submit")
              
         if button:
-             num_parts = 4
+             num_parts = 15
 
           # Calculate the number of entries per part
              entries_per_part = len(ddf) // num_parts
