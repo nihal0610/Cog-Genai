@@ -77,8 +77,10 @@ if uploaded_file is not None and openai_api_key:
                   result = invoke_agent_on_part(part, input_query)
                   value = result['output']  
                   value = value.strip('[]').split(',')
+                  st.write(value)
                   for i in range(0, len(value)):
                         value[i] =value[i].strip(" ")
+                        st.write(value[i])
                         value[i]=int(value[i])
                   result1.extend(value)
              # Create the agent
