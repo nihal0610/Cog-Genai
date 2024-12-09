@@ -45,11 +45,42 @@ if uploaded_file is not None and openai_api_key:
            button = st.button("Submit")
              
         if button:
+             num_parts = 6
+
+          # Calculate the number of entries per part
+             entries_per_part = len(ddf) // num_parts
+
+          # List to store the divided DataFrames
+             dfs = []
+
+          # Loop to divide the DataFrame into parts
+             for i in range(num_parts):
+                   start_index = i * entries_per_part
+                   # Ensure the last part includes any remaining entries
+                   end_index = start_index + entries_per_part if i < num_parts - 1 else len(df)
+                   dfs.append(df.iloc[start_index:end_index])
+
+          # Function to create the agent and invoke it on a DataFrame part
+             def invoke_agent_on_part(part, input_query):
+                   agent = create_pandas_dataframe_agent(llm, part, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=100)
+                   result = agent.invoke(input_query)
+                   return result
+
+          # List to store the results from each part
+             result1 = []
+               
+               # Input query for the agent
+             input_query = input
+               
+               # Loop to invoke the agent on each DataFrame part and collect results
+             for part in dfs:
+                   result = invoke_agent_on_part(part, input_query)
+                   result1.append(result)
              # Create the agent
-             agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, max_iterations=100,handle_parsing_errors=True)
+             #agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, max_iterations=100,handle_parsing_errors=True)
           
              # Get the result
-             result1 = agent.invoke(input)
+             #result1 = agent.invoke(input)
              value = result1['output']  
              value = value.strip('[]').split(',')
              st.write(value[0:5])
