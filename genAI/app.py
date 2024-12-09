@@ -62,7 +62,7 @@ if uploaded_file is not None and openai_api_key:
 
           # Function to create the agent and invoke it on a DataFrame part
              def invoke_agent_on_part(part, input_query):
-                   agent = create_pandas_dataframe_agent(llm, part, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=100)
+                   agent = create_pandas_dataframe_agent(llm, part, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=120)
                    result = agent.invoke(input_query)
                    return result
 
