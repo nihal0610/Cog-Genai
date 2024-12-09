@@ -75,6 +75,7 @@ if uploaded_file is not None and openai_api_key:
                # Loop to invoke the agent on each DataFrame part and collect results
              for part in dfs:
                   result = invoke_agent_on_part(part, input_query)
+                  st.write(result)
                   value = result['output']  
                   value = value.strip('[]').split(',')
                   st.write(value)
