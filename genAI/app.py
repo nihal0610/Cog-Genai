@@ -74,6 +74,7 @@ if uploaded_file is not None and openai_api_key:
                
                # Loop to invoke the agent on each DataFrame part and collect results
              for part in dfs:
+               try:
                   result = invoke_agent_on_part(part, input_query)
                   st.write(result)
                   value = result['output']  
@@ -84,6 +85,8 @@ if uploaded_file is not None and openai_api_key:
                         st.write(value[i])
                         value[i]=int(value[i])
                   result1.extend(value)
+               except Exception as e:
+                       print(f"Skipping part due to error: {e}")
              # Create the agent
              #agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, max_iterations=100,handle_parsing_errors=True)
           
