@@ -74,23 +74,21 @@ if uploaded_file is not None and openai_api_key:
                
                # Loop to invoke the agent on each DataFrame part and collect results
              for part in dfs:
-                   result = invoke_agent_on_part(part, input_query)
-                   result1.append(result)
+                  result = invoke_agent_on_part(part, input_query)
+                  value = result['output']  
+                  value = value.strip('[]').split(',')
+                  for i in range(0, len(value)):
+                        value[i] =value[i].strip(" ")
+                        value[i]=int(value[i])
+                        result1.append(value)
              # Create the agent
              #agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, max_iterations=100,handle_parsing_errors=True)
           
              # Get the result
              #result1 = agent.invoke(input)
-             value = result1['output']  
-             value = value.strip('[]').split(',')
-             st.write(value[0:5])
-             for i in range(0, len(value)):
-                  value[i] =value[i].strip(" ")
-                  value[i]=int(value[i])
-             st.write(value[0:5])
                
              #Display the result
-             st.write("Result:", value)
+             st.write("Result:", result1)
              # Filter DataFrame            
              df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id"]]
              st.write(df2)
