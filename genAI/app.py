@@ -64,7 +64,7 @@ if uploaded_file is not None and openai_api_key:
 
           # Function to create the agent and invoke it on a DataFrame part
              def invoke_agent_on_part(part, input_query):
-                   agent = create_pandas_dataframe_agent(llm, part, verbose=False, allow_dangerous_code=True, full_output=False, max_iterations=120)
+                   agent = create_pandas_dataframe_agent(llm, part, verbose=False, allow_dangerous_code=True, max_iterations=120)
                    result = agent.invoke(input_query)
                    return result
 
@@ -86,10 +86,12 @@ if uploaded_file is not None and openai_api_key:
                         value[i] =value[i].strip(" ")
                         #st.write(value[i])
                         value[i]=int(value[i])
-                  st.write(result1.extend(value))
-                  
+                        result1.extend(value[i])
+                  st.write(result1.extend(value[i]))
+               
                except Exception as e:
                        print(f"Skipping part due to error: {e}")
+             
              # Create the agent
              #agent = create_pandas_dataframe_agent(llm, ddf, verbose=False, allow_dangerous_code=True, max_iterations=100,handle_parsing_errors=True)
           
@@ -99,7 +101,7 @@ if uploaded_file is not None and openai_api_key:
              #Display the result
              st.write("Result:", result1)
              # Filter DataFrame            
-             df2 = ddf[ddf["Project Id"].isin(value)][["Manager ID", "Project Name", "Project Id", "Associate Name"]]
+             df2 = ddf[ddf["Project Id"].isin(result1)][["Manager ID", "Project Name", "Project Id", "Associate Name"]]
              st.write(df2)
              df2 = pd.DataFrame()
              st.write(df2)
