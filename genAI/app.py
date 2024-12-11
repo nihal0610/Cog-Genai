@@ -86,7 +86,7 @@ if uploaded_file is not None and openai_api_key:
                         value[i] =value[i].strip(" ")
                         #st.write(value[i])
                         value[i]=int(value[i])
-                  st.write(result1.append(value))
+                  st.write(result1.extend(value))
                   
                except Exception as e:
                        print(f"Skipping part due to error: {e}")
