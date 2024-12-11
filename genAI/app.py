@@ -45,7 +45,7 @@ if uploaded_file is not None and openai_api_key:
            button = st.button("Submit")
              
         if button:
-             num_parts = 10
+             num_parts = 15
 
           # Calculate the number of entries per part
              entries_per_part = len(ddf) // num_parts
@@ -86,7 +86,7 @@ if uploaded_file is not None and openai_api_key:
                         value[i] =value[i].strip(" ")
                         #st.write(value[i])
                         value[i]=int(value[i])
-                  st.write(result1.extend(value))
+                  st.write(result1.append(value))
                   
                except Exception as e:
                        print(f"Skipping part due to error: {e}")
