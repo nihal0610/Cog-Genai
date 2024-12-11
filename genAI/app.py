@@ -45,7 +45,7 @@ if uploaded_file is not None and openai_api_key:
            button = st.button("Submit")
              
         if button:
-             num_parts = 15
+             num_parts = 5
 
           # Calculate the number of entries per part
              entries_per_part = len(ddf) // num_parts
@@ -78,7 +78,7 @@ if uploaded_file is not None and openai_api_key:
              for part in dfs:
                try:
                   result = invoke_agent_on_part(part, input_query)
-                  st.write(result)
+                  st.write(result['output'])
                   value = result['output']  
                   value = value.strip('[]').split(',')
                   st.write(value)
